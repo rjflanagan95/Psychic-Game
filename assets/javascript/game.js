@@ -4,8 +4,13 @@ console.log("Computer choice: " + computerChoice);
 
 var numWins = 0;
 var numLosses = 0;
-var initialGuesses = 9;
+var attempts = 9;
 var letter = "";
+var guesses = [];
+var winsText = document.getElementById("wins");
+var lossesText = document.getElementById("losses");
+var attemptsText = document.getElementById("guesses-left");
+var guessesText = document.getElementById("already-guessed");
 
 document.onkeyup = function(event) {
     var letter = event.key.toLowerCase();
@@ -15,14 +20,25 @@ document.onkeyup = function(event) {
     if (letter === computerChoice) {
         numWins += 1;
         console.log("numWins: " + numWins);
-        initialGuesses = 9;
+        attempts = 9;
+        winsText.textContent = numWins;
+        attemptsText.textContent = attemptsText;
+        
     } else {
-        initialGuesses -= 1;
-        console.log("Guesses left: " + initialGuesses);
+        attempts -= 1;
+        console.log("Guesses left: " + attempts);
+        attemptsText.textContent = attempts;
+        guesses += letter;
+        guessesText.textContent = guesses;
+        
     }
-    if (initialGuesses === 0) {
+    if (attempts === 0) {
         numLosses += 1;
         console.log("numLosses: " + numLosses);
-        initialGuesses = 9;
+        attempts = 9;
+        lossesText.textContent = numLosses;
+        attemptsText.textContent = attempts;
+        guesses = [];
+        guessesText.textContent = guesses;
     }
 }
